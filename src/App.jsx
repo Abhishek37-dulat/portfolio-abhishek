@@ -16,7 +16,7 @@ import {
 
 const FlowMap = lazy(() => import("./components/FlowMap"));
 
-const resumeUrl = `${import.meta.env.BASE_URL}abhishek-resume-2026.pdf`;
+const resumeUrl = `${import.meta.env.BASE_URL}abhishek-2026.pdf`;
 const chipCityImage = `${import.meta.env.BASE_URL}${encodeURIComponent(
   "BEST WALLPAPERS.jpeg",
 )}`;
@@ -283,7 +283,9 @@ function App() {
     window.localStorage.setItem("portfolio-theme", activeTheme);
 
     const metaTheme = document.querySelector('meta[name="theme-color"]');
-    const selectedTheme = themeOptions.find((theme) => theme.id === activeTheme);
+    const selectedTheme = themeOptions.find(
+      (theme) => theme.id === activeTheme,
+    );
 
     if (metaTheme && selectedTheme) {
       metaTheme.setAttribute("content", selectedTheme.metaColor);
