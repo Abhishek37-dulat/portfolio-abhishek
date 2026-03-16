@@ -231,6 +231,14 @@ const contactNotes = [
 
 const themeOptions = [
   {
+    id: "aqua",
+    label: "Aqua",
+    description: "Teal with electric blue",
+    accentA: "#4af1d6",
+    accentB: "#69b7ff",
+    metaColor: "#041013",
+  },
+  {
     id: "circuit",
     label: "Circuit",
     description: "Neon lime with amber accents",
@@ -247,14 +255,6 @@ const themeOptions = [
     metaColor: "#120a08",
   },
   {
-    id: "aqua",
-    label: "Aqua",
-    description: "Teal with electric blue",
-    accentA: "#4af1d6",
-    accentB: "#69b7ff",
-    metaColor: "#041013",
-  },
-  {
     id: "ember",
     label: "Ember",
     description: "Crimson with warm sand",
@@ -264,7 +264,7 @@ const themeOptions = [
   },
 ];
 
-const defaultTheme = themeOptions[0].id;
+const defaultTheme = "aqua";
 
 function App() {
   const [activeTheme, setActiveTheme] = useState(() => {
@@ -289,6 +289,9 @@ function App() {
       metaTheme.setAttribute("content", selectedTheme.metaColor);
     }
   }, [activeTheme]);
+
+  const activeThemeOption =
+    themeOptions.find((theme) => theme.id === activeTheme) ?? themeOptions[0];
 
   return (
     <div className="app-root">
@@ -315,29 +318,26 @@ function App() {
 
           <div className="theme-switcher">
             <span className="theme-switcher-label">Theme</span>
-            <div className="theme-options" role="group" aria-label="Color themes">
-              {themeOptions.map((theme) => (
-                <button
-                  key={theme.id}
-                  type="button"
-                  className={`theme-chip${
-                    activeTheme === theme.id ? " is-active" : ""
-                  }`}
-                  onClick={() => setActiveTheme(theme.id)}
-                  aria-pressed={activeTheme === theme.id}
-                  title={theme.description}
-                >
-                  <span className="theme-chip-preview" aria-hidden="true">
-                    <span
-                      style={{ backgroundColor: theme.accentA }}
-                    />
-                    <span
-                      style={{ backgroundColor: theme.accentB }}
-                    />
-                  </span>
-                  <span>{theme.label}</span>
-                </button>
-              ))}
+            <div className="theme-select-shell">
+              <span className="theme-chip-preview" aria-hidden="true">
+                <span style={{ backgroundColor: activeThemeOption.accentA }} />
+                <span style={{ backgroundColor: activeThemeOption.accentB }} />
+              </span>
+              <label className="sr-only" htmlFor="theme-select">
+                Select color theme
+              </label>
+              <select
+                id="theme-select"
+                className="theme-select"
+                value={activeTheme}
+                onChange={(event) => setActiveTheme(event.target.value)}
+              >
+                {themeOptions.map((theme) => (
+                  <option key={theme.id} value={theme.id}>
+                    {theme.label}
+                  </option>
+                ))}
+              </select>
             </div>
           </div>
         </div>
