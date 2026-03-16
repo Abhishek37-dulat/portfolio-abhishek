@@ -1,4 +1,4 @@
-import { lazy, Suspense, useEffect, useState } from "react";
+import { lazy, Suspense } from "react";
 import { motion } from "framer-motion";
 import {
   ArrowRight,
@@ -9,260 +9,511 @@ import {
   GraduationCap,
   Linkedin,
   Mail,
-  Moon,
   Phone,
   Rocket,
   Server,
-  Sun,
 } from "lucide-react";
 
-const Scene3D = lazy(() => import("./components/Scene3D"));
 const FlowMap = lazy(() => import("./components/FlowMap"));
 
+const chipCityImage = encodeURI("/BEST WALLPAPERS.jpeg");
+
+const reveal = {
+  initial: { opacity: 0, y: 24 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true, amount: 0.2 },
+  transition: { duration: 0.55, ease: "easeOut" },
+};
+
+const signalCards = [
+  {
+    label: "Backend Development",
+    value: "Node.js, Express.js, Microservices, Chi, REST APIs",
+  },
+  {
+    label: "Languages",
+    value: "JavaScript, TypeScript, Python, Go, C++, HTML, CSS",
+  },
+  {
+    label: "Data & Caching",
+    value: "PostgreSQL, MongoDB, MariaDB, ClickHouse, Redis, Elasticsearch",
+  },
+  {
+    label: "Cloud & Messaging",
+    value: "Docker, Linux deployment, AWS, gRPC, NATS",
+  },
+];
+
+const skillGroups = [
+  {
+    title: "Backend Development",
+    items: [
+      "Node.js",
+      "Express.js",
+      "Microservices",
+      "Chi (Go Router)",
+      "REST API Development",
+    ],
+  },
+  {
+    title: "Web Development",
+    items: ["React", "Next.js", "Tailwind", "MaterialUI", "jQuery"],
+  },
+  {
+    title: "App Development",
+    items: ["React Native"],
+  },
+  {
+    title: "Languages",
+    items: [
+      "C++",
+      "JavaScript",
+      "TypeScript",
+      "Python",
+      "Go (Golang)",
+      "HTML",
+      "CSS",
+    ],
+  },
+  {
+    title: "Databases & Caching",
+    items: [
+      "PostgreSQL",
+      "MongoDB",
+      "MariaDB",
+      "ClickHouse",
+      "Elasticsearch",
+      "Redis",
+    ],
+  },
+  {
+    title: "Cloud Services",
+    items: [
+      "Docker",
+      "Linux Server Deployment",
+      "AWS Route53",
+      "AWS CDN",
+      "AWS Lambda",
+      "AWS S3",
+      "AWS Load Balancers",
+    ],
+  },
+  {
+    title: "Tools & Platforms",
+    items: [
+      "Git",
+      "Zoho",
+      "Postman",
+      "Android Studio",
+      "VS Code",
+      "Visual Studio",
+    ],
+  },
+  {
+    title: "Messaging / Communication",
+    items: ["gRPC", "NATS"],
+  },
+];
+
+const focusAreas = [
+  {
+    icon: <Server size={18} />,
+    title: "Reliability-First Delivery",
+    text: "Scalable and secure backend services with strong API behavior, caching, and production stability.",
+  },
+  {
+    icon: <Cpu size={18} />,
+    title: "Performance Engineering",
+    text: "Service optimization, Go migrations, and infrastructure choices that reduce friction under load.",
+  },
+  {
+    icon: <Rocket size={18} />,
+    title: "End-to-End Shipping",
+    text: "Frontend, backend, databases, cloud deployment, and operational cleanup handled as one system.",
+  },
+];
+
+const experience = [
+  {
+    role: "Senior Software Engineer",
+    company: "Nubewell Networks -> Sechpoint Technologies",
+    duration: "July 2024 - Present",
+    highlights: [
+      "Developed scalable and secure backend services using Node.js, TypeScript, gRPC, NATS, and Redis while contributing as a full-stack developer.",
+      "Improved API performance and reliability through service optimization and efficient caching strategies.",
+      "Migrated two production services from Python to Go to leverage high concurrency and better performance.",
+      "Transitioned inter-service communication from REST APIs to NATS messaging for faster and more decoupled communication.",
+      "Integrated centralized logging and error tracking across microservices for faster issue resolution.",
+    ],
+  },
+  {
+    role: "Full Stack Developer",
+    company: "Geteideas",
+    duration: "June 2023 - Feb 2024",
+    highlights: [
+      "Developed full-stack web applications using the MERN stack with Redux across multiple client projects.",
+      "Built e-commerce platforms, household service booking products, and customized product ordering systems with design features.",
+      "Implemented backend services with MongoDB, PostgreSQL, and Redis, then handled deployment and hosting on Hostinger.",
+    ],
+  },
+  {
+    role: "Software Engineer",
+    company: "Locus",
+    duration: "April 2023",
+    highlights: [
+      "Developed frontend features using React.js and Redux to improve user interaction and state management in the logistics platform.",
+      "Built and integrated backend APIs using Node.js and MongoDB for logistics data and service operations.",
+      "Collaborated with the engineering team to debug issues, implement new features, and improve application performance.",
+    ],
+  },
+  {
+    role: "Full Stack Developer",
+    company: "Offerplant Technologies",
+    duration: "March 2022 - May 2023",
+    highlights: [
+      "Developed responsive user interfaces using React and managed application state with Redux for MERN-based web applications.",
+      "Integrated frontend components with backend APIs built using Node.js and MongoDB.",
+      "Contributed to feature development and bug fixes across live products.",
+    ],
+  },
+];
+
+const projects = [
+  {
+    name: "TradeBro",
+    type: "Algorithmic Trading Platform",
+    stack: "Python, MERN, PostgreSQL, gRPC",
+    icon: <Server size={20} />,
+    notes: [
+      "Developed an algorithmic trading platform to execute automated trading strategies using Python for strategy execution and Node.js for backend services.",
+      "Built the system with React for the frontend and integrated services using gRPC, with data stored in PostgreSQL and MongoDB.",
+    ],
+  },
+  {
+    name: "Sortlizer",
+    type: "Sorting Visualizer Web App",
+    stack: "MERN",
+    icon: <Cpu size={20} />,
+    notes: [
+      "Developed an interactive web application to visualize Bubble Sort, Merge Sort, and Quick Sort step by step using React.",
+      "Built dynamic UI updates and algorithm execution flows to demonstrate real-time sorting behavior.",
+    ],
+  },
+  {
+    name: "Restaurant Management System",
+    type: "Desktop Application",
+    stack: "Python, Tkinter, MySQL",
+    icon: <Rocket size={20} />,
+    notes: [
+      "Developed a desktop application using Tkinter to manage order handling, billing, and menu operations.",
+      "Implemented backend data storage using MySQL with Python for efficient data management and retrieval.",
+    ],
+  },
+];
+
+const contactNotes = [
+  {
+    title: "Open To",
+    text: "I am open to backend-heavy roles, full-stack product work, and systems where reliability matters as much as speed.",
+  },
+  {
+    title: "Core Strength",
+    text: "My strength is turning messy requirements into cleaner services, clearer contracts, and shippable production code.",
+  },
+  {
+    title: "Preferred Stack",
+    text: "I am strongest with Node.js, TypeScript, Go, React, PostgreSQL, Redis, gRPC, NATS, Docker, and AWS.",
+  },
+];
+
 function App() {
-  const [theme, setTheme] = useState(() => {
-    if (typeof window === "undefined") return "dark";
-    const saved = window.localStorage.getItem("theme");
-    if (saved === "dark" || saved === "light") return saved;
-    return window.matchMedia("(prefers-color-scheme: dark)").matches
-      ? "dark"
-      : "light";
-  });
-
-  useEffect(() => {
-    document.documentElement.setAttribute("data-theme", theme);
-    window.localStorage.setItem("theme", theme);
-  }, [theme]);
-
-  const skills = [
-    "Node.js",
-    "Express.js",
-    "TypeScript",
-    "React",
-    "Next.js",
-    "React Native",
-    "MongoDB",
-    "PostgreSQL",
-    "Redis",
-    "Docker",
-    "AWS",
-    "Go",
-    "gRPC",
-    "NATS",
-  ];
-
-  const companies = [
-    {
-      role: "Senior Software Engineer",
-      company: "Nubewell Networks → SecPoint Technologies",
-      duration: "Jul 2024 — Present",
-      highlights: [
-        "Built high-reliability backend services with Node.js, TypeScript, gRPC, NATS, and Redis.",
-        "Migrated production services from Python to Go for improved concurrency and performance.",
-        "Transitioned service communication from REST APIs to NATS-based messaging.",
-      ],
-    },
-    {
-      role: "Software Engineer",
-      company: "Locus",
-      duration: "Apr 2023",
-      highlights: [
-        "Developed React + Redux frontend features for logistics workflows.",
-        "Built and integrated backend APIs using Node.js and MongoDB.",
-      ],
-    },
-    {
-      role: "Full Stack Developer",
-      company: "Geteideas",
-      duration: "Jun 2023 — Feb 2024",
-      highlights: [
-        "Delivered MERN products across e-commerce and service-booking domains.",
-        "Managed deployments and platform reliability for production clients.",
-      ],
-    },
-    {
-      role: "Full Stack Developer",
-      company: "Offerplant Technologies",
-      duration: "Mar 2022 — May 2023",
-      highlights: [
-        "Built responsive React interfaces and integrated Node.js + MongoDB APIs.",
-        "Contributed feature delivery and bug fixes across MERN applications.",
-      ],
-    },
-  ];
-
-  const projects = [
-    {
-      name: "Sortlizer (Sorting Visualizer)",
-      stack: "MERN",
-      description:
-        "Interactive algorithm visualizer for Bubble, Merge, and Quick Sort with real-time UI feedback and step-by-step behavior tracking.",
-    },
-    {
-      name: "Restaurant Management System",
-      stack: "Python, Tkinter, MySQL",
-      description:
-        "Desktop system for order handling, billing, and menu operations with efficient relational data management.",
-    },
-    {
-      name: "Trade Bro",
-      stack: "Python, MERN, PostgreSQL, gRPC",
-      description:
-        "Algorithmic trading platform with automated strategy execution and distributed service communication.",
-    },
-  ];
-
-  const focusAreas = [
-    {
-      icon: <Server size={18} />,
-      title: "Backend Reliability",
-      text: "Microservices, gRPC, Redis, and resilient API contracts with measurable uptime focus.",
-    },
-    {
-      icon: <Cpu size={18} />,
-      title: "Data & Performance",
-      text: "PostgreSQL, MongoDB, caching, and concurrency-focused architecture decisions.",
-    },
-    {
-      icon: <Rocket size={18} />,
-      title: "Product Shipping",
-      text: "End-to-end delivery from feature ideation to deployment, optimization, and monitoring.",
-    },
-  ];
-
-  const toggleTheme = () => {
-    setTheme((prev) => (prev === "dark" ? "light" : "dark"));
-  };
-
   return (
     <div className="app-root">
-      <nav className="top-nav">
+      <div className="page-noise" aria-hidden="true" />
+
+      <header className="topbar">
         <a href="#home" className="brand">
-          AD.
+          <span className="brand-mark">AD</span>
+          <span className="brand-copy">
+            Abhishek Dulat
+            <small>Senior Software Engineer • Full-stack developer</small>
+          </span>
         </a>
-        <div className="nav-links">
-          <a href="#about">About</a>
-          <a href="#companies">Experience</a>
+
+        <nav className="nav-links" aria-label="Primary">
+          <a href="#resume">Resume</a>
+          <a href="#skills">Skills</a>
+          <a href="#systems">Systems</a>
+          <a href="#experience">Experience</a>
           <a href="#projects">Projects</a>
-          <a href="#flow">Flow</a>
           <a href="#contact">Contact</a>
-          <button className="theme-toggle" onClick={toggleTheme} type="button">
-            {theme === "dark" ? <Sun size={15} /> : <Moon size={15} />}
-            {theme === "dark" ? "Light" : "Dark"}
-          </button>
-        </div>
-      </nav>
+        </nav>
+      </header>
 
-      <main className="site-shell">
-        <section className="hero-screen" id="home">
-          <div className="hero-scene" aria-hidden="true">
-            <Suspense
-              fallback={<div className="lazy-panel">Loading 3D scene…</div>}
-            >
-              <Scene3D theme={theme} />
-            </Suspense>
-          </div>
+      <main className="page-shell">
+        <section className="hero" id="home">
+          <motion.div
+            className="hero-copy"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.65, ease: "easeOut" }}
+          >
+            <p className="eyebrow">Senior software engineer • backend systems • full-stack delivery</p>
+            <h1>Backend systems that feel engineered, not decorated.</h1>
+            <p className="hero-text">
+              I&apos;m Abhishek Dulat, a senior software engineer building
+              backend-heavy products with Node.js, TypeScript, Go, React,
+              PostgreSQL, Redis, gRPC, NATS, and cloud deployment workflows
+              that stay readable under production pressure.
+            </p>
 
-          <div className="hero-copy">
-            <motion.p
-              initial={{ opacity: 0, y: 8 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="eyebrow"
-            >
-              Senior Software Engineer • Full-stack Developer
-            </motion.p>
-            <motion.h1
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.1 }}
-            >
-              Abhishek Dulat
-            </motion.h1>
-            <motion.p
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
-              className="subtitle"
-            >
-              Building reliable software across frontend, backend, and
-              distributed systems — focused on speed, stability, and outcomes.
-            </motion.p>
-            <p className="scene-tip">Move your cursor — the 3D world responds live.</p>
-            <motion.div
-              className="hero-actions"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.3 }}
-            >
+            <div className="hero-actions">
               <a
                 className="btn btn-primary"
                 href="/abhishek-resume-2026.pdf"
                 download
               >
-                <Download size={17} /> Download Resume
+                <Download size={17} />
+                Download Resume
               </a>
-              <a className="btn btn-secondary" href="#projects">
-                View Projects <ArrowRight size={16} />
+              <a className="btn btn-secondary" href="#systems">
+                Explore System Flow
+                <ArrowRight size={16} />
               </a>
-            </motion.div>
-            <div className="contact-row">
+            </div>
+
+            <div className="hero-links">
               <a href="mailto:abhishek11906997dulat@gmail.com">
-                <Mail size={16} /> Email
+                <Mail size={15} />
+                abhishek11906997dulat@gmail.com
               </a>
               <a href="tel:+919518118356">
-                <Phone size={16} /> Call
+                <Phone size={15} />
+                +91 9518118356
               </a>
               <a
                 href="https://linkedin.com/in/abhishekdulat"
                 target="_blank"
                 rel="noreferrer"
               >
-                <Linkedin size={16} /> LinkedIn
+                <Linkedin size={15} />
+                linkedin.com/in/abhishekdulat
               </a>
               <a
                 href="https://github.com/Abhishek37-dulat"
                 target="_blank"
                 rel="noreferrer"
               >
-                <Github size={16} /> GitHub
+                <Github size={15} />
+                github.com/Abhishek37-dulat
               </a>
             </div>
-          </div>
+
+            <div className="signal-grid">
+              {signalCards.map((item) => (
+                <article key={item.label} className="signal-card">
+                  <p className="panel-label">{item.label}</p>
+                  <p>{item.value}</p>
+                </article>
+              ))}
+            </div>
+          </motion.div>
+
+          <motion.div
+            className="hero-stage"
+            initial={{ opacity: 0, scale: 0.97 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.7, delay: 0.15, ease: "easeOut" }}
+          >
+            <div className="hero-board hero-board-minimal">
+              <article className="hero-image-frame">
+                <img
+                  className="hero-board-image"
+                  src={chipCityImage}
+                  alt="Glowing chip city representing large-scale systems"
+                />
+                <div className="hero-image-tag">
+                  <p className="panel-label">Backend Systems</p>
+                  <p>I like systems that stay clean as they scale.</p>
+                </div>
+              </article>
+
+              <article className="hero-bottom-band">
+                <div>
+                  <span className="panel-key">Current role</span>
+                  <p>
+                    I&apos;m currently a Senior Software Engineer at Nubewell
+                    Networks -&gt; Sechpoint Technologies.
+                  </p>
+                </div>
+                <div>
+                  <span className="panel-key">Strongest stack</span>
+                  <p>I work most with Node.js, TypeScript, Go, Redis, PostgreSQL, gRPC, NATS, and React.</p>
+                </div>
+                <div>
+                  <span className="panel-key">Delivery style</span>
+                  <p>I like working end to end, with backend-first thinking and cleaner systems underneath.</p>
+                </div>
+              </article>
+            </div>
+          </motion.div>
         </section>
 
-        <section className="section" id="about">
-          <h2>What I Build</h2>
-          <div className="focus-grid">
-            {focusAreas.map((item) => (
-              <article className="focus-card" key={item.title}>
-                <p className="focus-title">
-                  {item.icon} {item.title}
-                </p>
-                <p>{item.text}</p>
+        <motion.section className="section" id="resume" {...reveal}>
+          <div className="section-heading">
+            <p className="section-kicker">About Me</p>
+            <h2>I build backend-heavy products that stay reliable as they grow.</h2>
+            <p className="section-text">
+              My recent work has focused on backend reliability, service
+              communication, migrations, full-stack delivery, and the
+              production details that keep systems healthy.
+            </p>
+          </div>
+
+          <div className="resume-grid">
+            <article className="story-card story-card-wide">
+              <p className="panel-label">What I Focus On</p>
+              <h3>I focus on scalable backend services, production reliability, and calmer system behavior.</h3>
+              <p>
+                My strongest recent experience is in secure backend services
+                built with Node.js, TypeScript, gRPC, NATS, and Redis. I have
+                also worked on service optimization, caching improvements,
+                migrations from Python to Go, and centralized logging across
+                microservices.
+              </p>
+              <div className="bullet-row">
+                <span>Microservices</span>
+                <span>Go migrations</span>
+                <span>gRPC + NATS</span>
+                <span>Centralized logging</span>
+              </div>
+            </article>
+
+            <article className="focus-wrap">
+              {focusAreas.map((item) => (
+                <article className="focus-card" key={item.title}>
+                  <p className="focus-title">
+                    {item.icon}
+                    {item.title}
+                  </p>
+                  <p>{item.text}</p>
+                </article>
+              ))}
+            </article>
+
+            <article className="story-card resume-visual-card">
+              <p className="panel-label">What Matters To Me</p>
+              <h3>I prefer clear structure, strong hierarchy, and systems that feel intentional.</h3>
+              <p>
+                In both engineering and UI, I prefer clarity over noise. I care
+                about good structure, consistent decisions, and details that
+                make a system easier to understand and maintain.
+              </p>
+              <div className="bullet-row">
+                <span>Clarity</span>
+                <span>Consistency</span>
+                <span>Intentional details</span>
+              </div>
+            </article>
+          </div>
+        </motion.section>
+
+        <motion.section className="section" id="skills" {...reveal}>
+          <div className="section-heading">
+            <p className="section-kicker">Skill Set</p>
+            <h2>I work across backend, frontend, data, messaging, and cloud delivery.</h2>
+            <p className="section-text">
+              I like understanding the whole system, not just one layer of it.
+            </p>
+          </div>
+
+          <div className="skill-matrix">
+            {skillGroups.map((group) => (
+              <article key={group.title} className="skill-card">
+                <p className="panel-label">{group.title}</p>
+                <p>{group.items.join(" • ")}</p>
               </article>
             ))}
           </div>
-          <div className="chip-grid">
-            {skills.map((skill) => (
-              <span key={skill} className="chip">
-                {skill}
-              </span>
-            ))}
-          </div>
-        </section>
+        </motion.section>
 
-        <section className="section" id="companies">
-          <h2>Experience</h2>
-          <div className="timeline">
-            {companies.map((item) => (
-              <article
-                key={`${item.company}-${item.role}`}
-                className="timeline-card"
+        <motion.section className="section" id="systems" {...reveal}>
+          <div className="section-heading">
+            <p className="section-kicker">How I Think</p>
+            <h2>This is the delivery pattern I keep coming back to.</h2>
+            <p className="section-text">
+              I usually work from user-facing surfaces into services, messaging,
+              data, and deployment so the whole system stays connected.
+            </p>
+          </div>
+
+          <div className="flow-layout">
+            <div className="flow-shell">
+              <Suspense
+                fallback={
+                  <div className="lazy-panel">Loading architecture flow...</div>
+                }
               >
-                <p className="timeline-meta">{item.duration}</p>
+                <FlowMap theme="dark" />
+              </Suspense>
+            </div>
+
+            <div className="flow-side">
+              <article className="note-card">
+                <p className="panel-label">Delivery Pattern</p>
+                <h3>I move between frontend surfaces, resilient services, messaging, caching, and shipping.</h3>
+                <p>
+                  Across my work, a similar pattern shows up again and again:
+                  React on the product surface, Node.js or Go at the core, then
+                  databases, caching, and deployment handled without losing the
+                  system view.
+                </p>
+                <ul>
+                  <li>React, Next.js, and React Native for user-facing work.</li>
+                  <li>Node.js, Express.js, Go, gRPC, and NATS for service layers.</li>
+                  <li>PostgreSQL, MongoDB, MariaDB, Redis, and AWS for delivery.</li>
+                </ul>
+              </article>
+
+              <article className="note-card system-aside-card">
+                <p className="panel-label">What Stays Consistent</p>
+                <h3>I try to keep architecture readable and execution practical.</h3>
+                <p>
+                  No matter the stack, I try to ship across frontend, backend,
+                  data, and deployment without losing the system view.
+                </p>
+                <div className="bullet-row">
+                  <span>APIs</span>
+                  <span>Messaging</span>
+                  <span>Caching</span>
+                  <span>Deployments</span>
+                </div>
+              </article>
+            </div>
+          </div>
+        </motion.section>
+
+        <motion.section className="section" id="experience" {...reveal}>
+          <div className="section-heading">
+            <p className="section-kicker">Experience</p>
+            <h2>These are the roles where I have built most of my systems experience.</h2>
+            <p className="section-text">
+              My work has mostly lived across backend services, product
+              delivery, and full-stack execution.
+            </p>
+          </div>
+
+          <div className="experience-grid">
+            {experience.map((item) => (
+              <article
+                className="experience-card"
+                key={`${item.company}-${item.role}`}
+              >
+                <p className="timeline-duration">{item.duration}</p>
                 <h3>{item.role}</h3>
                 <p className="timeline-company">
-                  <Building2 size={16} /> {item.company}
+                  <Building2 size={16} />
+                  {item.company}
                 </p>
                 <ul>
                   {item.highlights.map((point) => (
@@ -272,71 +523,116 @@ function App() {
               </article>
             ))}
           </div>
-        </section>
+        </motion.section>
 
-        <section className="section" id="projects">
-          <h2>Projects</h2>
+        <motion.section className="section" id="projects" {...reveal}>
+          <div className="section-heading">
+            <p className="section-kicker">Projects</p>
+            <h2>These projects show how I build across different kinds of systems.</h2>
+            <p className="section-text">
+              They range from algorithm visualization to trading workflows and
+              desktop operations tools, but they all reflect the way I like to
+              build.
+            </p>
+          </div>
+
           <div className="project-grid">
             {projects.map((project) => (
-              <article key={project.name} className="project-card">
-                <h3>{project.name}</h3>
-                <p className="project-stack">{project.stack}</p>
-                <p>{project.description}</p>
+              <article className="project-card" key={project.name}>
+                <div className="project-body">
+                  <div className="project-top">
+                    <span className="project-icon">{project.icon}</span>
+                    <p className="panel-label">{project.type}</p>
+                  </div>
+                  <h3>{project.name}</h3>
+                  <p className="project-stack">{project.stack}</p>
+                  <ul>
+                    {project.notes.map((note) => (
+                      <li key={note}>{note}</li>
+                    ))}
+                  </ul>
+                </div>
               </article>
             ))}
           </div>
-        </section>
+        </motion.section>
 
-        <section className="section flow-section" id="flow">
-          <h2>Wire your ideas with React Flow</h2>
-          <p className="section-note">
-            System thinking from business problem to production impact.
-          </p>
-          <div className="flow-wrap">
-            <Suspense
-              fallback={
-                <div className="lazy-panel">Loading architecture map…</div>
-              }
-            >
-              <FlowMap theme={theme} />
-            </Suspense>
-          </div>
-        </section>
+        <motion.section className="section" id="contact" {...reveal}>
+          <div className="contact-layout">
+            <div className="contact-copy">
+              <p className="section-kicker">Contact</p>
+              <h2>I am open to backend and full-stack work where system quality matters.</h2>
+              <p className="section-text">
+                I enjoy working on products where reliability, maintainability,
+                and long-term system quality matter as much as shipping speed.
+              </p>
 
-        <section className="section" id="contact">
-          <h2>Education & Contact</h2>
-          <div className="edu-grid">
-            <article className="edu-card">
-              <p className="timeline-company">
-                <GraduationCap size={16} /> Lovely Professional University
-              </p>
-              <h3>B.Tech in Information Technology</h3>
-              <p className="timeline-meta">2019 — 2023</p>
-            </article>
-            <article className="edu-card">
-              <h3>Let&apos;s connect</h3>
-              <p className="section-note">
-                Open to engineering roles focused on scalable product platforms.
-              </p>
-              <div className="contact-row">
+              <div className="contact-actions">
+                <a
+                  className="btn btn-primary"
+                  href="mailto:abhishek11906997dulat@gmail.com"
+                >
+                  <Mail size={16} />
+                  Email Me
+                </a>
+                <a className="btn btn-secondary" href="/abhishek-resume-2026.pdf" download>
+                  <Download size={16} />
+                  Resume PDF
+                </a>
+              </div>
+
+              <div className="contact-links-panel">
                 <a href="mailto:abhishek11906997dulat@gmail.com">
-                  <Mail size={16} /> abhishek11906997dulat@gmail.com
+                  <Mail size={15} />
+                  Abhishek11906997dulat@gmail.com
+                </a>
+                <a href="tel:+919518118356">
+                  <Phone size={15} />
+                  +91 9518118356
                 </a>
                 <a
                   href="https://linkedin.com/in/abhishekdulat"
                   target="_blank"
                   rel="noreferrer"
                 >
-                  <Linkedin size={16} /> linkedin.com/in/abhishekdulat
+                  <Linkedin size={15} />
+                  linkedin.com/in/abhishekdulat
+                </a>
+                <a
+                  href="https://github.com/Abhishek37-dulat"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <Github size={15} />
+                  github.com/Abhishek37-dulat
                 </a>
               </div>
-            </article>
+
+              <article className="education-card">
+                <p className="panel-label">Education</p>
+                <h3>Bachelor of Technology in Information Technology</h3>
+                <p className="timeline-company">
+                  <GraduationCap size={16} />
+                  Lovely Professional University, Punjab, India
+                </p>
+                <p className="timeline-duration">2019 - 2023</p>
+              </article>
+            </div>
+
+            <div className="contact-side-grid">
+              {contactNotes.map((item) => (
+                <article className="note-card" key={item.title}>
+                  <p className="panel-label">{item.title}</p>
+                  <h3>{item.title}</h3>
+                  <p>{item.text}</p>
+                </article>
+              ))}
+            </div>
           </div>
-        </section>
+        </motion.section>
 
         <footer className="footer-note">
-          © {new Date().getFullYear()} Abhishek Dulat • Cyberpunk Portfolio
-          Build
+          © {new Date().getFullYear()} Abhishek Dulat • Resume-driven systems portfolio
         </footer>
       </main>
     </div>
