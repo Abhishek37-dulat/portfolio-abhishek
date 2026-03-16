@@ -16,7 +16,10 @@ import {
 
 const FlowMap = lazy(() => import("./components/FlowMap"));
 
-const chipCityImage = encodeURI("/BEST WALLPAPERS.jpeg");
+const resumeUrl = `${import.meta.env.BASE_URL}abhishek-resume-2026.pdf`;
+const chipCityImage = `${import.meta.env.BASE_URL}${encodeURIComponent(
+  "BEST WALLPAPERS.jpeg"
+)}`;
 
 const reveal = {
   initial: { opacity: 0, y: 24 },
@@ -270,7 +273,7 @@ function App() {
             <div className="hero-actions">
               <a
                 className="btn btn-primary"
-                href="/abhishek-resume-2026.pdf"
+                href={resumeUrl}
                 download
               >
                 <Download size={17} />
@@ -575,7 +578,7 @@ function App() {
                   <Mail size={16} />
                   Email Me
                 </a>
-                <a className="btn btn-secondary" href="/abhishek-resume-2026.pdf" download>
+                <a className="btn btn-secondary" href={resumeUrl} download>
                   <Download size={16} />
                   Resume PDF
                 </a>
