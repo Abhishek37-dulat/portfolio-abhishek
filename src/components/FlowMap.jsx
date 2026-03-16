@@ -2,17 +2,51 @@ import { useMemo } from "react";
 import ReactFlow, { Background, Controls, MarkerType } from "reactflow";
 import "reactflow/dist/style.css";
 
-export default function FlowMap({ theme = "dark" }) {
-  const isDark = theme === "dark";
-  const palette = {
-    cardBg: isDark ? "#101714" : "#f4f8ef",
-    cardText: isDark ? "#eef4dc" : "#17221c",
-    cardAlt: isDark ? "#b3ff4a" : "#0f7a41",
-    border: isDark ? "#2a3a2d" : "#c8d7bc",
-    canvas: isDark ? "#0a110d" : "#edf3e5",
-    canvasLine: isDark ? "#18231b" : "#d7e3cb",
-    edge: isDark ? "#ffb258" : "#c47a21",
-  };
+const flowPalettes = {
+  circuit: {
+    cardBg: "#101714",
+    cardText: "#eef4dc",
+    cardAlt: "#b3ff4a",
+    border: "#2a3a2d",
+    canvasLine: "#1a261d",
+    edge: "#ffb258",
+    controlsBg: "rgba(16, 23, 20, 0.88)",
+    controlsHover: "rgba(26, 37, 31, 0.98)",
+  },
+  copper: {
+    cardBg: "#19110d",
+    cardText: "#fff0da",
+    cardAlt: "#ff9152",
+    border: "#463027",
+    canvasLine: "#261913",
+    edge: "#ffd166",
+    controlsBg: "rgba(30, 20, 16, 0.9)",
+    controlsHover: "rgba(49, 31, 25, 0.98)",
+  },
+  aqua: {
+    cardBg: "#0d1719",
+    cardText: "#e9fcff",
+    cardAlt: "#4af1d6",
+    border: "#244046",
+    canvasLine: "#173037",
+    edge: "#69b7ff",
+    controlsBg: "rgba(12, 24, 28, 0.9)",
+    controlsHover: "rgba(20, 39, 45, 0.98)",
+  },
+  ember: {
+    cardBg: "#1a1012",
+    cardText: "#fff0e6",
+    cardAlt: "#ff6b6b",
+    border: "#47262c",
+    canvasLine: "#2a171b",
+    edge: "#ffc57a",
+    controlsBg: "rgba(28, 18, 21, 0.9)",
+    controlsHover: "rgba(45, 28, 31, 0.98)",
+  },
+};
+
+export default function FlowMap({ theme = "circuit" }) {
+  const palette = flowPalettes[theme] ?? flowPalettes.circuit;
 
   const nodeStyle = {
     background: palette.cardBg,
@@ -153,6 +187,7 @@ export default function FlowMap({ theme = "dark" }) {
     <ReactFlow
       nodes={nodes}
       edges={edges}
+      colorMode="dark"
       fitView
       fitViewOptions={{ padding: 0.14 }}
       nodesDraggable={false}
@@ -161,7 +196,13 @@ export default function FlowMap({ theme = "dark" }) {
       zoomOnPinch={false}
     >
       <Background color={palette.canvasLine} gap={22} />
-      <Controls showInteractive={false} />
+      <Controls
+        showInteractive={false}
+        style={{
+          background: palette.controlsBg,
+          borderRadius: 14,
+        }}
+      />
     </ReactFlow>
   );
 }

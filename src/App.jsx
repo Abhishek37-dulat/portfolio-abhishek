@@ -1,4 +1,4 @@
-import { lazy, Suspense } from "react";
+import { lazy, Suspense, useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import {
   ArrowRight,
@@ -229,7 +229,67 @@ const contactNotes = [
   },
 ];
 
+const themeOptions = [
+  {
+    id: "circuit",
+    label: "Circuit",
+    description: "Neon lime with amber accents",
+    accentA: "#b3ff4a",
+    accentB: "#ffb258",
+    metaColor: "#060907",
+  },
+  {
+    id: "copper",
+    label: "Copper",
+    description: "Burnt orange with brass highlights",
+    accentA: "#ff9152",
+    accentB: "#ffd166",
+    metaColor: "#120a08",
+  },
+  {
+    id: "aqua",
+    label: "Aqua",
+    description: "Teal with electric blue",
+    accentA: "#4af1d6",
+    accentB: "#69b7ff",
+    metaColor: "#041013",
+  },
+  {
+    id: "ember",
+    label: "Ember",
+    description: "Crimson with warm sand",
+    accentA: "#ff6b6b",
+    accentB: "#ffc57a",
+    metaColor: "#14080a",
+  },
+];
+
+const defaultTheme = themeOptions[0].id;
+
 function App() {
+  const [activeTheme, setActiveTheme] = useState(() => {
+    if (typeof window === "undefined") {
+      return defaultTheme;
+    }
+
+    const storedTheme = window.localStorage.getItem("portfolio-theme");
+    return themeOptions.some((theme) => theme.id === storedTheme)
+      ? storedTheme
+      : defaultTheme;
+  });
+
+  useEffect(() => {
+    document.documentElement.dataset.theme = activeTheme;
+    window.localStorage.setItem("portfolio-theme", activeTheme);
+
+    const metaTheme = document.querySelector('meta[name="theme-color"]');
+    const selectedTheme = themeOptions.find((theme) => theme.id === activeTheme);
+
+    if (metaTheme && selectedTheme) {
+      metaTheme.setAttribute("content", selectedTheme.metaColor);
+    }
+  }, [activeTheme]);
+
   return (
     <div className="app-root">
       <div className="page-noise" aria-hidden="true" />
@@ -243,14 +303,44 @@ function App() {
           </span>
         </a>
 
-        <nav className="nav-links" aria-label="Primary">
-          <a href="#resume">Resume</a>
-          <a href="#skills">Skills</a>
-          <a href="#systems">Systems</a>
-          <a href="#experience">Experience</a>
-          <a href="#projects">Projects</a>
-          <a href="#contact">Contact</a>
-        </nav>
+        <div className="topbar-tools">
+          <nav className="nav-links" aria-label="Primary">
+            <a href="#resume">Resume</a>
+            <a href="#skills">Skills</a>
+            <a href="#systems">Systems</a>
+            <a href="#experience">Experience</a>
+            <a href="#projects">Projects</a>
+            <a href="#contact">Contact</a>
+          </nav>
+
+          <div className="theme-switcher">
+            <span className="theme-switcher-label">Theme</span>
+            <div className="theme-options" role="group" aria-label="Color themes">
+              {themeOptions.map((theme) => (
+                <button
+                  key={theme.id}
+                  type="button"
+                  className={`theme-chip${
+                    activeTheme === theme.id ? " is-active" : ""
+                  }`}
+                  onClick={() => setActiveTheme(theme.id)}
+                  aria-pressed={activeTheme === theme.id}
+                  title={theme.description}
+                >
+                  <span className="theme-chip-preview" aria-hidden="true">
+                    <span
+                      style={{ backgroundColor: theme.accentA }}
+                    />
+                    <span
+                      style={{ backgroundColor: theme.accentB }}
+                    />
+                  </span>
+                  <span>{theme.label}</span>
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
       </header>
 
       <main className="page-shell">
@@ -472,10 +562,9 @@ function App() {
                   <div className="lazy-panel">Loading architecture flow...</div>
                 }
               >
-                <FlowMap theme="dark" />
+                <FlowMap theme={activeTheme} />
               </Suspense>
             </div>
-            {/* hii */}
             <div className="flow-side">
               <article className="note-card">
                 <p className="panel-label">Delivery Pattern</p>
