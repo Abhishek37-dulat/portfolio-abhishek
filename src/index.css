@@ -3,6 +3,64 @@
 :root {
   font-family: "Space Grotesk", "Segoe UI", sans-serif;
   color-scheme: dark;
+  --bg-main: #04080b;
+  --bg-body-top: #041013;
+  --bg-body-bottom: #04080b;
+  --bg-panel: rgba(6, 13, 15, 0.93);
+  --bg-elevated: rgba(11, 20, 22, 0.9);
+  --bg-chip: rgba(15, 28, 31, 0.78);
+  --bg-topbar: rgba(7, 13, 15, 0.82);
+  --bg-nav: rgba(11, 21, 24, 0.72);
+  --bg-secondary-btn: rgba(12, 22, 25, 0.84);
+  --bg-pill: rgba(11, 21, 24, 0.76);
+  --bg-tag: rgba(9, 18, 21, 0.76);
+  --bg-panel-top: rgba(11, 20, 22, 0.94);
+  --bg-panel-bottom: rgba(6, 12, 15, 0.97);
+  --bg-surface-top: rgba(14, 26, 30, 0.92);
+  --bg-surface-bottom: rgba(7, 13, 15, 0.94);
+  --bg-board-top: rgba(13, 25, 29, 0.96);
+  --bg-board-bottom: rgba(6, 12, 15, 0.96);
+  --bg-flow-shell: rgba(6, 16, 18, 0.96);
+  --bg-flow-shell-alt: rgba(6, 16, 18, 0.95);
+  --text-main: #ebfdff;
+  --text-soft: #9fc4c8;
+  --text-dim: rgba(159, 196, 200, 0.76);
+  --lime: #4af1d6;
+  --amber: #69b7ff;
+  --teal: #8af5ff;
+  --brand-text-dark: #06211d;
+  --btn-text-dark: #051917;
+  --brand-gradient-end: #bffbfd;
+  --btn-gradient-end: #a6d4ff;
+  --glow-primary: rgba(74, 241, 214, 0.15);
+  --glow-secondary: rgba(105, 183, 255, 0.12);
+  --glow-tertiary: rgba(138, 245, 255, 0.09);
+  --noise-primary: rgba(74, 241, 214, 0.09);
+  --noise-secondary: rgba(105, 183, 255, 0.08);
+  --noise-tertiary: rgba(138, 245, 255, 0.08);
+  --section-glow-top: rgba(74, 241, 214, 0.07);
+  --section-glow-bottom: rgba(105, 183, 255, 0.06);
+  --hero-board-glow-1: rgba(74, 241, 214, 0.11);
+  --hero-board-glow-2: rgba(105, 183, 255, 0.11);
+  --hero-image-accent: rgba(105, 183, 255, 0.18);
+  --flow-glow-1: rgba(74, 241, 214, 0.09);
+  --flow-glow-2: rgba(105, 183, 255, 0.08);
+  --flow-glow-1-soft: rgba(74, 241, 214, 0.07);
+  --surface-border: rgba(255, 255, 255, 0.08);
+  --surface-border-strong: rgba(255, 255, 255, 0.18);
+  --surface-sheen: rgba(255, 255, 255, 0.03);
+  --grid-line: rgba(255, 255, 255, 0.018);
+  --ghost-line: rgba(255, 255, 255, 0.02);
+  --line: rgba(74, 241, 214, 0.18);
+  --line-strong: rgba(105, 183, 255, 0.3);
+  --shadow-lg: 0 30px 90px rgba(0, 0, 0, 0.42);
+  --shadow-card: 0 18px 48px rgba(0, 0, 0, 0.28);
+  --radius-xl: 30px;
+  --radius-lg: 24px;
+  --radius-md: 18px;
+}
+
+:root[data-theme="circuit"] {
   --bg-main: #050706;
   --bg-body-top: #060907;
   --bg-body-bottom: #050706;
@@ -46,18 +104,8 @@
   --flow-glow-1: rgba(179, 255, 74, 0.08);
   --flow-glow-2: rgba(255, 178, 88, 0.08);
   --flow-glow-1-soft: rgba(179, 255, 74, 0.06);
-  --surface-border: rgba(255, 255, 255, 0.08);
-  --surface-border-strong: rgba(255, 255, 255, 0.18);
-  --surface-sheen: rgba(255, 255, 255, 0.03);
-  --grid-line: rgba(255, 255, 255, 0.018);
-  --ghost-line: rgba(255, 255, 255, 0.02);
   --line: rgba(179, 255, 74, 0.14);
   --line-strong: rgba(255, 178, 88, 0.28);
-  --shadow-lg: 0 30px 90px rgba(0, 0, 0, 0.42);
-  --shadow-card: 0 18px 48px rgba(0, 0, 0, 0.28);
-  --radius-xl: 30px;
-  --radius-lg: 24px;
-  --radius-md: 18px;
 }
 
 :root[data-theme="copper"] {
