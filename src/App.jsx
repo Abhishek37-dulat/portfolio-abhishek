@@ -18,7 +18,7 @@ const FlowMap = lazy(() => import("./components/FlowMap"));
 
 const resumeUrl = `${import.meta.env.BASE_URL}abhishek-resume-2026.pdf`;
 const chipCityImage = `${import.meta.env.BASE_URL}${encodeURIComponent(
-  "BEST WALLPAPERS.jpeg"
+  "BEST WALLPAPERS.jpeg",
 )}`;
 
 const reveal = {
@@ -261,21 +261,19 @@ function App() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.65, ease: "easeOut" }}
           >
-            <p className="eyebrow">Senior software engineer • backend systems • full-stack delivery</p>
+            <p className="eyebrow">
+              Senior software engineer • backend systems • full-stack delivery
+            </p>
             <h1>Backend systems that feel engineered, not decorated.</h1>
             <p className="hero-text">
               I&apos;m Abhishek Dulat, a senior software engineer building
               backend-heavy products with Node.js, TypeScript, Go, React,
-              PostgreSQL, Redis, gRPC, NATS, and cloud deployment workflows
-              that stay readable under production pressure.
+              PostgreSQL, Redis, gRPC, NATS, and cloud deployment workflows that
+              stay readable under production pressure.
             </p>
 
             <div className="hero-actions">
-              <a
-                className="btn btn-primary"
-                href={resumeUrl}
-                download
-              >
+              <a className="btn btn-primary" href={resumeUrl} download>
                 <Download size={17} />
                 Download Resume
               </a>
@@ -351,11 +349,17 @@ function App() {
                 </div>
                 <div>
                   <span className="panel-key">Strongest stack</span>
-                  <p>I work most with Node.js, TypeScript, Go, Redis, PostgreSQL, gRPC, NATS, and React.</p>
+                  <p>
+                    I work most with Node.js, TypeScript, Go, Redis, PostgreSQL,
+                    gRPC, NATS, and React.
+                  </p>
                 </div>
                 <div>
                   <span className="panel-key">Delivery style</span>
-                  <p>I like working end to end, with backend-first thinking and cleaner systems underneath.</p>
+                  <p>
+                    I like working end to end, with backend-first thinking and
+                    cleaner systems underneath.
+                  </p>
                 </div>
               </article>
             </div>
@@ -365,18 +369,23 @@ function App() {
         <motion.section className="section" id="resume" {...reveal}>
           <div className="section-heading">
             <p className="section-kicker">About Me</p>
-            <h2>I build backend-heavy products that stay reliable as they grow.</h2>
+            <h2>
+              I build backend-heavy products that stay reliable as they grow.
+            </h2>
             <p className="section-text">
               My recent work has focused on backend reliability, service
-              communication, migrations, full-stack delivery, and the
-              production details that keep systems healthy.
+              communication, migrations, full-stack delivery, and the production
+              details that keep systems healthy.
             </p>
           </div>
 
           <div className="resume-grid">
             <article className="story-card story-card-wide">
               <p className="panel-label">What I Focus On</p>
-              <h3>I focus on scalable backend services, production reliability, and calmer system behavior.</h3>
+              <h3>
+                I focus on scalable backend services, production reliability,
+                and calmer system behavior.
+              </h3>
               <p>
                 My strongest recent experience is in secure backend services
                 built with Node.js, TypeScript, gRPC, NATS, and Redis. I have
@@ -406,7 +415,10 @@ function App() {
 
             <article className="story-card resume-visual-card">
               <p className="panel-label">What Matters To Me</p>
-              <h3>I prefer clear structure, strong hierarchy, and systems that feel intentional.</h3>
+              <h3>
+                I prefer clear structure, strong hierarchy, and systems that
+                feel intentional.
+              </h3>
               <p>
                 In both engineering and UI, I prefer clarity over noise. I care
                 about good structure, consistent decisions, and details that
@@ -424,7 +436,10 @@ function App() {
         <motion.section className="section" id="skills" {...reveal}>
           <div className="section-heading">
             <p className="section-kicker">Skill Set</p>
-            <h2>I work across backend, frontend, data, messaging, and cloud delivery.</h2>
+            <h2>
+              I work across backend, frontend, data, messaging, and cloud
+              delivery.
+            </h2>
             <p className="section-text">
               I like understanding the whole system, not just one layer of it.
             </p>
@@ -460,11 +475,14 @@ function App() {
                 <FlowMap theme="dark" />
               </Suspense>
             </div>
-
+            {/* hii */}
             <div className="flow-side">
               <article className="note-card">
                 <p className="panel-label">Delivery Pattern</p>
-                <h3>I move between frontend surfaces, resilient services, messaging, caching, and shipping.</h3>
+                <h3>
+                  I move between frontend surfaces, resilient services,
+                  messaging, caching, and shipping.
+                </h3>
                 <p>
                   Across my work, a similar pattern shows up again and again:
                   React on the product surface, Node.js or Go at the core, then
@@ -472,15 +490,23 @@ function App() {
                   system view.
                 </p>
                 <ul>
-                  <li>React, Next.js, and React Native for user-facing work.</li>
-                  <li>Node.js, Express.js, Go, gRPC, and NATS for service layers.</li>
-                  <li>PostgreSQL, MongoDB, MariaDB, Redis, and AWS for delivery.</li>
+                  <li>
+                    React, Next.js, and React Native for user-facing work.
+                  </li>
+                  <li>
+                    Node.js, Express.js, Go, gRPC, and NATS for service layers.
+                  </li>
+                  <li>
+                    PostgreSQL, MongoDB, MariaDB, Redis, and AWS for delivery.
+                  </li>
                 </ul>
               </article>
 
               <article className="note-card system-aside-card">
                 <p className="panel-label">What Stays Consistent</p>
-                <h3>I try to keep architecture readable and execution practical.</h3>
+                <h3>
+                  I try to keep architecture readable and execution practical.
+                </h3>
                 <p>
                   No matter the stack, I try to ship across frontend, backend,
                   data, and deployment without losing the system view.
@@ -499,7 +525,10 @@ function App() {
         <motion.section className="section" id="experience" {...reveal}>
           <div className="section-heading">
             <p className="section-kicker">Experience</p>
-            <h2>These are the roles where I have built most of my systems experience.</h2>
+            <h2>
+              These are the roles where I have built most of my systems
+              experience.
+            </h2>
             <p className="section-text">
               My work has mostly lived across backend services, product
               delivery, and full-stack execution.
@@ -531,7 +560,9 @@ function App() {
         <motion.section className="section" id="projects" {...reveal}>
           <div className="section-heading">
             <p className="section-kicker">Projects</p>
-            <h2>These projects show how I build across different kinds of systems.</h2>
+            <h2>
+              These projects show how I build across different kinds of systems.
+            </h2>
             <p className="section-text">
               They range from algorithm visualization to trading workflows and
               desktop operations tools, but they all reflect the way I like to
@@ -564,7 +595,10 @@ function App() {
           <div className="contact-layout">
             <div className="contact-copy">
               <p className="section-kicker">Contact</p>
-              <h2>I am open to backend and full-stack work where system quality matters.</h2>
+              <h2>
+                I am open to backend and full-stack work where system quality
+                matters.
+              </h2>
               <p className="section-text">
                 I enjoy working on products where reliability, maintainability,
                 and long-term system quality matter as much as shipping speed.
@@ -635,7 +669,8 @@ function App() {
         </motion.section>
 
         <footer className="footer-note">
-          © {new Date().getFullYear()} Abhishek Dulat • Resume-driven systems portfolio
+          © {new Date().getFullYear()} Abhishek Dulat • Resume-driven systems
+          portfolio
         </footer>
       </main>
     </div>
